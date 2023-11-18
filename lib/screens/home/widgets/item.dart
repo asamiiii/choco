@@ -1,7 +1,9 @@
+import 'package:choco/models/item_model.dart';
 import 'package:flutter/material.dart';
 
 class Item extends StatelessWidget {
-  const Item({super.key});
+   ItemModel? chocoItem;
+   Item({super.key,required this.chocoItem});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,8 @@ class Item extends StatelessWidget {
                       borderRadius: const BorderRadius.only(
                         bottomLeft:Radius.circular(40),
                         topRight: Radius.circular(40),
-                        bottomRight:Radius.circular(40) 
+                        bottomRight:Radius.circular(40),
+                         topLeft:Radius.circular(10)
                         ),
                       child: Container(
                         color: Colors.amber,
@@ -22,12 +25,12 @@ class Item extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Positioned(
+                   Positioned(
                       top: 0,
                       left: 14,
                       child: CircleAvatar(
                         backgroundColor: Colors.transparent,
-                        backgroundImage: AssetImage('assets/images/R.jpg'),
+                        backgroundImage: NetworkImage(chocoItem?.images??''),
                         radius: 75,
                       )),
                   Positioned(
@@ -41,7 +44,7 @@ class Item extends StatelessWidget {
                             width: 160,
                             height: 30,
                             child: Text(
-                              'Text Chocoo',
+                              chocoItem?.name??'',
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
@@ -53,7 +56,7 @@ class Item extends StatelessWidget {
                             width: 140,
                             height: 50,
                             child: Text(
-                              'Text Chocoooo',
+                              chocoItem?.discription??'',
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
