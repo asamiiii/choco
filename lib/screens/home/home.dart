@@ -39,6 +39,7 @@ class _HomeState extends State<Home> {
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
       child: Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CategoryNavigator(
             labels: categoryList,
@@ -52,7 +53,7 @@ class _HomeState extends State<Home> {
             },
           ),
           const SizedBox(height: 20),
-          Expanded(
+          DummyData.filteredChocoList.isNotEmpty? Expanded(
             child: GridView.builder(
               shrinkWrap: true,
               itemBuilder: (context, index) =>
@@ -65,6 +66,12 @@ class _HomeState extends State<Home> {
                 crossAxisSpacing: 10,
               ),
             ),
+          ): Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height*0.30,),
+              const Center(child: Text('No Items For This Category !')),
+            ],
           ),
         ],
       ),

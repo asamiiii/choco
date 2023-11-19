@@ -44,29 +44,29 @@ class DummyData{
       id: '4',
       images: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
       ingredients: 'ingredients : ingredients,ingredients:ingredients',
-      name: 'Choco4',
+      name: 'Choco3',
       price: '10'
       ),
       ItemModel(
       branch:'benha',
-      category: 'cat2',
+      category: 'cat1',
       discount: null,
       discription: ' discription discription discription discription discription',
       id: '5',
       images: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
       ingredients: 'ingredients : ingredients,ingredients:ingredients',
-      name: 'Choco5',
+      name: 'Choco1',
       price: '10'
       ),
       ItemModel(
       branch:'benha',
-      category: 'cat4',
+      category: 'cat3',
       discount: null,
       discription: ' discription discription discription discription discription',
       id: '6',
       images: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
       ingredients: 'ingredients : ingredients,ingredients:ingredients',
-      name: 'Choco6',
+      name: 'Choco3',
       price: '10'
       ),
   ];
