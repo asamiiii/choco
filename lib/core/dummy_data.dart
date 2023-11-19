@@ -1,6 +1,7 @@
 import 'package:choco/models/item_model.dart';
 
 class DummyData{
+  static var filteredChocoList=[];
   static List<ItemModel> chocoList=[
     ItemModel(
       branch:'benha',
