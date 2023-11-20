@@ -6,6 +6,18 @@ import 'package:flutter/material.dart';
 
 import '../../models/item_model.dart';
 
+List<String>? keepOneInstance(List<String>? list) {
+  final seenItems = <dynamic>{};
+
+  final filteredList = list?.where((item) {
+    final hasSeen = seenItems.contains(item);
+    seenItems.add(item);
+    return !hasSeen;
+  }).toList();
+
+  return filteredList??[];
+}
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -14,12 +26,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-    List<String> categoryList = const ['cat1', 'cat2', 'cat3', 'Python', 'Flutter', 'Text', 'iOS', 'Web', 'Windows'];
+    List<String>? categoryList =  [];
   @override
   void initState() {
     // TODO: implement initState
+    for (var element in DummyData.chocoList) { 
+      var splitted= element.category?.split(',');
+      categoryList?.addAll(splitted??[]);
+    }
+    categoryList= keepOneInstance(categoryList);
     DummyData.filteredChocoList = DummyData.chocoList
-                    .where((element) => element.category == categoryList[0])
+                    .where((element) => element.category!.contains(categoryList?[0]??''))
                     .toList();
     super.initState();
   }
@@ -47,7 +64,7 @@ class _HomeState extends State<Home> {
             onChange: (index) {
               setState(() {
                 DummyData.filteredChocoList = DummyData.chocoList
-                    .where((element) => element.category == categoryList[index])
+                    .where((element) => element.category!.contains(categoryList![index]))
                     .toList();
               });
             },

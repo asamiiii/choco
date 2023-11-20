@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "869272810992",
+    "project_id": "choco-sweden",
+    "storage_bucket": "choco-sweden.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869272810992:android:9867ac1746428447255935",
+        "android_client_info": {
+          "package_name": "com.example.choco"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBfTbn7FN-oKZiUQMuIil91fhxIisX5BA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

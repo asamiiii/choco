@@ -8,6 +8,7 @@ class ItemModel{
   String? discount;
   String? ingredients;
   String? images;
+  String? nutritionDeclaration;
 
   ItemModel({
     this.id,
@@ -18,6 +19,9 @@ class ItemModel{
     this.branch,
     this.price,
     this.discount,
-    this.ingredients
+    this.ingredients,
+    this.nutritionDeclaration
   });}
+  
+
 
