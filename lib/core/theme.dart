@@ -4,9 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme{
   
 static ThemeData theme=   ThemeData(
+        // primaryColor: golden,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.amberAccent,
-
+          seedColor: golden,
+          primary: golden
           ),
         scaffoldBackgroundColor:mainColor,
         appBarTheme: const AppBarTheme(backgroundColor:mainColor),

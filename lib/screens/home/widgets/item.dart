@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:choco/core/colors.dart';
 import 'package:choco/core/images_path.dart';
 import 'package:choco/models/item_model.dart';
 import 'package:choco/screens/item_detailes/item_det.dart';
@@ -22,7 +23,7 @@ class Item extends StatelessWidget {
                 bottomRight: Radius.circular(40),
                 topLeft: Radius.circular(10)),
             child: Container(
-              color: Colors.amber,
+              color: golden,
               height: 220,
               width: 190,
             ),

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:choco/core/colors.dart';
 import 'package:choco/models/item_model.dart';
 import 'package:choco/screens/item_detailes/widgets.dart/image_datails.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
      });
       // nutritionRow = widget.chocoItem?.nutritionDeclaration?.split(':'); 
      debugPrint('nutritionColumn1 : $nutritionColumn1');
-     debugPrint('nutritionColumn2 :$nutritionColumn2');
+     debugPrint('nutritionColumn2 :${nutritionColumn2.length}');
     return Scaffold(
       // appBar: AppBar(),
       floatingActionButton: FloatingActionButton(onPressed: (){
@@ -63,13 +64,13 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                               // height: MediaQuery.of(context).size.height*0.20,
                               width: MediaQuery.of(context).size.width*0.90,
                               decoration: BoxDecoration(
-                                color: Colors.amberAccent,
-                                border: Border.all(color: Colors.amber),
+                                color: golden,
+                                border: Border.all(color: Colors.brown),
                                 borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  // topRight: Radius.circular(50),
+                                  topLeft: Radius.circular(40),
+                                  topRight: Radius.circular(40),
                                   // bottomLeft: Radius.circular(23),
-                                  // bottomRight: Radius.circular(50),
+                                  bottomRight: Radius.circular(40),
                                 )
                                 
                               ),
@@ -88,34 +89,25 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
       
                           const SizedBox(height: 20,),
                            Text('Nutrition declaration per 100g',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13)),
-                           const SizedBox(height: 5,),
+                          //  const SizedBox(height: 5,),
                            
-                           LayoutBuilder(
-                             builder:(context, constraints) =>  Container(
-                              width: MediaQuery.of(context).size.width*0.50,
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.amberAccent,
-                                border: Border.all(color: Colors.amberAccent),
-                                borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(20),)
-                              ),
-                               child: ListView.separated(
-                                separatorBuilder: (context, index) => const SizedBox(height: 10,),
-                                shrinkWrap: true,
-                               itemCount: nutritionColumn1.length,
-                               itemBuilder: (BuildContext context, int index) {
-                                 return Row(
-                                   mainAxisAlignment: MainAxisAlignment.center,
-                                   children: [
-                                     Text(nutritionColumn1[index]),
-                                     const SizedBox(width: 50,),
-                                     Text(nutritionColumn2[index])],
-                                 );
-                               },
+                           ListView.builder(
+                            // separatorBuilder: (context, index) => const SizedBox(height: 10,),
+                            shrinkWrap: true,
+                            physics: const ScrollPhysics(),
+                           itemCount: nutritionColumn2.length,
+                           itemBuilder: (BuildContext context, int index) {
+                             return Row(
+                               mainAxisAlignment: MainAxisAlignment.spaceAround,
+                               children: [
+                                 Text(nutritionColumn1[index]),
+                                //  const Text('  -------  ',),
+                                 Text(nutritionColumn2[index])],
+                             );
+                           },
                              ),
-                             ),
-                           ),const SizedBox(height: 30,)
+                           
+                           const SizedBox(height: 30,)
                     ],
           ),
         ),

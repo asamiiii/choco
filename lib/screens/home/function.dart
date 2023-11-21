@@ -1,4 +1,5 @@
 import 'package:choco/core/dummy_data.dart';
+import 'package:flutter/material.dart';
 
 List<String>? categoryList =  [];
 
@@ -17,7 +18,7 @@ List<String>? keepOneInstance(List<String>? list) {
 }
 
 // Handle Categories text to list using splittin by comma ','
-void handleCategoryItemsList(){
+void handleCategoryItemsList({String? branchName}){
   for (var element in DummyData.chocoList) {
           /*---> split the cat list <---*/
       var splitted= element.category?.split(',');
@@ -26,11 +27,17 @@ void handleCategoryItemsList(){
     categoryList= keepOneInstance(categoryList);
 
     //! initiat the first item in category list as default
-    setSelectedCategory(categoryList?[0]??'');
+    setSelectedCategory(categoryTxt: categoryList?[0]??'',branch:branchName);
 }
 /*Initiat the first item in category list as default*/
-void setSelectedCategory(String? categoryTxt){
+void setSelectedCategory({String? categoryTxt,String? branch}){
+  debugPrint('branch:$branch');
   DummyData.filteredChocoList = DummyData.chocoList
-                    .where((element) => element.category!.contains(categoryTxt ??''))
+                    .where((element) {
+                      
+                      return element.category!.contains(categoryTxt ??'') && element.branch==branch;
+                      
+                      })
                     .toList();
+  
 }

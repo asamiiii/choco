@@ -1,6 +1,7 @@
 import 'package:choco/core/theme.dart';
 import 'package:choco/firebase_options.dart';
 import 'package:choco/screens/home/home.dart';
+import 'package:choco/screens/login/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +27,7 @@ class ChocoApp extends StatelessWidget {
     return MaterialApp(
       title: '',
       theme: AppTheme.theme,
-      home: const Home(),
+      home:  LoginScreen(),
     );
   }
 }

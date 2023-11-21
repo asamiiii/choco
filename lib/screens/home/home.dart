@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  String? branchName;
+   Home({super.key,this.branchName});
 
   @override
   State<Home> createState() => _HomeState();
@@ -20,7 +21,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     //? Intial Category
-    handleCategoryItemsList();
+    handleCategoryItemsList(branchName: widget.branchName);
     super.initState();
   }
   @override
@@ -41,7 +42,7 @@ class _HomeState extends State<Home> {
             labels: categoryList,
             defaultActiveItem: 0,
             onChange: (index) {
-              setSelectedCategory(categoryList![index]);
+              setSelectedCategory(categoryTxt: categoryList![index],branch: widget.branchName);
               setState(() {});
             },
           ),
