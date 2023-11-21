@@ -1,22 +1,12 @@
 import 'package:category_navigator/category_navigator.dart';
-import 'package:choco/core/colors.dart';
 import 'package:choco/core/dummy_data.dart';
+import 'package:choco/core/images_path.dart';
+import 'package:choco/screens/home/function.dart';
 import 'package:choco/screens/home/widgets/item.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/item_model.dart';
 
-List<String>? keepOneInstance(List<String>? list) {
-  final seenItems = <dynamic>{};
 
-  final filteredList = list?.where((item) {
-    final hasSeen = seenItems.contains(item);
-    seenItems.add(item);
-    return !hasSeen;
-  }).toList();
-
-  return filteredList??[];
-}
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -26,29 +16,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-    List<String>? categoryList =  [];
+    
   @override
   void initState() {
-    // TODO: implement initState
-    for (var element in DummyData.chocoList) { 
-      var splitted= element.category?.split(',');
-      categoryList?.addAll(splitted??[]);
-    }
-    categoryList= keepOneInstance(categoryList);
-    DummyData.filteredChocoList = DummyData.chocoList
-                    .where((element) => element.category!.contains(categoryList?[0]??''))
-                    .toList();
+    //? Intial Category
+    handleCategoryItemsList();
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-  
-    // Iterable<ItemModel> itemList=[];
-    // var height =MediaQuery.of(context).size.height;
-    
     return Scaffold(
         appBar: AppBar(
-          title: Image.asset('assets/images/logo.jpeg',fit: BoxFit.fill,)),
+          title: Image.asset(ImagePath.logo,fit: BoxFit.fill,)),
         body: LayoutBuilder(
   builder: (context, constraints) {
     var screenWidth = constraints.maxWidth;
@@ -62,11 +41,8 @@ class _HomeState extends State<Home> {
             labels: categoryList,
             defaultActiveItem: 0,
             onChange: (index) {
-              setState(() {
-                DummyData.filteredChocoList = DummyData.chocoList
-                    .where((element) => element.category!.contains(categoryList![index]))
-                    .toList();
-              });
+              setSelectedCategory(categoryList![index]);
+              setState(() {});
             },
           ),
           const SizedBox(height: 20),

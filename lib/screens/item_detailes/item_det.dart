@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:choco/models/item_model.dart';
+import 'package:choco/screens/item_detailes/widgets.dart/image_datails.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ChocoDetailes extends StatefulWidget {
-  ItemModel? chocoItem;
+   ItemModel? chocoItem;
    ChocoDetailes({super.key,this.chocoItem});
 
   @override
@@ -35,32 +37,8 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
         child: SingleChildScrollView(
           child: Column(
                     children: [
-                      Row(mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 300,
-                            width: 300,
-                          child: Hero(
-                            transitionOnUserGestures:true ,
-                            tag: widget.chocoItem?.id??'',
-                            child: ClipOval(
-                              child: CachedNetworkImage(
-                              imageUrl: widget.chocoItem?.images ?? '',
-                              placeholder: (context, url) => const CircleAvatar(
-                                  backgroundImage: AssetImage('assets/images/loading.webp'),
-                                  radius: 100),
-                              errorWidget: (context, url, error) => const Icon(Icons.error),
-                              fit: BoxFit.cover,
-                              width: 140, // Adjust the size as needed
-                              height: 140,
-                                            ),
-                            ),
-                          ),
-                          ),
-                          
-                        ],
-                      ),
-                      const SizedBox(height: 15,),
+                       DeatilesImage(chocoItem: widget.chocoItem),
+                       const SizedBox(height: 15,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -87,7 +65,7 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                               decoration: BoxDecoration(
                                 color: Colors.amberAccent,
                                 border: Border.all(color: Colors.amber),
-                                borderRadius: BorderRadius.only(
+                                borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(20),
                                   // topRight: Radius.circular(50),
                                   // bottomLeft: Radius.circular(23),

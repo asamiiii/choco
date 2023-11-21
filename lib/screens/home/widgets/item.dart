@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:choco/core/images_path.dart';
 import 'package:choco/models/item_model.dart';
 import 'package:choco/screens/item_detailes/item_det.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Item extends StatelessWidget {
   ItemModel? chocoItem;
   Item({super.key, required this.chocoItem});
@@ -43,7 +45,7 @@ class Item extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: chocoItem?.images ?? '',
                     placeholder: (context, url) => const CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/loading.webp'),
+                        backgroundImage: AssetImage(ImagePath.loading),
                         radius: 100),
                     errorWidget: (context, url, error) => const Icon(Icons.error),
                     fit: BoxFit.cover,
