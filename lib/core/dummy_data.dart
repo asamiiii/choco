@@ -10,7 +10,7 @@ class DummyData{
       discription: ' discription discription discription discription discription',
       id: '1',
       images: 'https://selectitaly.com/blog/wp-content/uploads/ferrero-rocher-3992585_1920.jpg',
-      ingredients: 'ingredients : ingredients,ingredients:ingredients ingredients : ingredients,ingredients:ingredients ingredients : ingredients,ingredients:ingredients ingredients : ingredients,ingredients:ingredients ingredients : ingredients,ingredients:ingredients',
+      ingredients: 'ingredients igredients,ingredients:ingredients ingredients ingredients,ingredients ingredients ingredients ingredients,ingredients ingredients ingredients ingredients,ingredientsi ngredients ingredients ingredients,ingredients ingredients',
       name: 'Choco1',
       price: '10',
       nutritionDeclaration: 'Salt:0,08 g - Salt:0,08 g - Salt:0,08 g - Salt:0,08 g - Salt:0,08 g'
