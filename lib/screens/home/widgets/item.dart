@@ -80,6 +80,7 @@ class Item extends StatelessWidget {
                   child: Text(
                     chocoItem?.discription ?? '',
                     overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 )

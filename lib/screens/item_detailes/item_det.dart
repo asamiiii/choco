@@ -53,13 +53,13 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                             SizedBox(
-                              width: MediaQuery.of(context).size.width-100,
+                              width: MediaQuery.of(context).size.width*0.70,
                               height: 50,
                               child: Text(
-                                
+                                textAlign: TextAlign.center,
                                 widget.chocoItem?.discription??'',style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 15),maxLines: 3,overflow: TextOverflow.ellipsis,))
                           ],),
-                          const SizedBox(height: 20,),
+                          // const SizedBox(height: 10,),
                            Text('Ingredients',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 15),),
                           const SizedBox(height: 5,),
                           LayoutBuilder(
@@ -68,7 +68,7 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                               width: MediaQuery.of(context).size.width*0.90,
                               decoration: BoxDecoration(
                                 color: golden,
-                                border: Border.all(color: Colors.brown),
+                                border: Border.all(color: Colors.brown,width: 2),
                                 borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(40),
                                   topRight: Radius.circular(40),
