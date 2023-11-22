@@ -21,7 +21,41 @@ class ItemModel{
     this.discount,
     this.ingredients,
     this.nutritionDeclaration
-  });}
+  });
+  
+  
+   Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'images': images,
+      'discription': discription,
+      'category':category,
+      'branch':branch,
+      'price':price,
+      'discount': discount,
+      'ingredients':ingredients,
+      'nutritionDeclaration':nutritionDeclaration
+    };
+  }
+
+  factory ItemModel.fromJson(Map<String, dynamic> map) {
+    return ItemModel(
+      id: map['id'] ?? '',
+      name: map['name'] ??'',
+      images:map['images'] ??'',
+      discription:map['discription'] ??'',
+      category:map['category'] ??'',
+      branch:map['branch'] ??'',
+      price:map['price'] ??'',
+      discount:map['discount'] ??'',
+      ingredients:map['ingredients'] ??'',
+      nutritionDeclaration:map['nutritionDeclaration'] ,
+    );
+  }
+  }
+
+ 
   
 
 

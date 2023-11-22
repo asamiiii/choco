@@ -1,13 +1,33 @@
 import 'package:choco/core/colors.dart';
 import 'package:choco/core/dummy_data.dart';
 import 'package:choco/core/images_path.dart';
+import 'package:choco/data_source/remote_firebase.dart';
+import 'package:choco/screens/home/function.dart';
 import 'package:choco/screens/home/home.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
    LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
 TextEditingController codeController = TextEditingController();
+
+
+@override
+  void initState() {
+   
+    WidgetsBinding.instance.addPostFrameCallback((_)async {
+      await FirebaseHelper.getItemsFromFirestore();
+    handleBranchesItemsList();
+    });
+    
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
@@ -44,7 +64,7 @@ TextEditingController codeController = TextEditingController();
             const SizedBox(height: 20,),
             ElevatedButton(
               onPressed: (){
-                if(DummyData.branches.contains(codeController.text.trim())){
+                if(branches.contains(codeController.text.trim())){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  Home(branchName:codeController.text.trim()),));
                 }else{
                   ScaffoldMessenger.of(context).showSnackBar(

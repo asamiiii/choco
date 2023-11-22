@@ -17,14 +17,17 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
  
   @override
   Widget build(BuildContext context) {
-     var nutritionRow = widget.chocoItem?.nutritionDeclaration?.split('-'); 
+     var nutritionRow = widget.chocoItem?.nutritionDeclaration?.trim().split('-')??[]; 
      var nutritionColumn1=[];
      var nutritionColumn2=[];
-     nutritionRow?.forEach((element) { 
-      var splitted= element.split(':');
+     for (var element in nutritionRow) { 
+      List<String>? splitted= element.trim().split(':');
+      // if(splitted.length>2){
       nutritionColumn1.add(splitted[0].trim());
       nutritionColumn2.add(splitted[1].trim());
-     });
+      // }
+      
+     }
       // nutritionRow = widget.chocoItem?.nutritionDeclaration?.split(':'); 
      debugPrint('nutritionColumn1 : $nutritionColumn1');
      debugPrint('nutritionColumn2 :${nutritionColumn2.length}');
