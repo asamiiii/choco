@@ -14,6 +14,7 @@ class ChocoDetailes extends StatefulWidget {
 }
 
 class _ChocoDetailesState extends State<ChocoDetailes> {
+  List<String>imagesList=[];
  
   @override
   Widget build(BuildContext context) {
@@ -25,12 +26,14 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
       // if(splitted.length>2){
       nutritionColumn1.add(splitted[0].trim());
       nutritionColumn2.add(splitted[1].trim());
-      // }
-      
      }
       // nutritionRow = widget.chocoItem?.nutritionDeclaration?.split(':'); 
      debugPrint('nutritionColumn1 : $nutritionColumn1');
      debugPrint('nutritionColumn2 :${nutritionColumn2.length}');
+
+      widget.chocoItem?.imagesList?.trim().split(',').forEach((element) { 
+        imagesList.add(element);
+      });
     return Scaffold(
       // appBar: AppBar(),
       floatingActionButton: FloatingActionButton(onPressed: (){
@@ -41,12 +44,18 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
         child: SingleChildScrollView(
           child: Column(
                     children: [
-                       DeatilesImage(chocoItem: widget.chocoItem),
+                       DeatilesImage(itemId: widget.chocoItem?.id,imagesList: imagesList),
                        const SizedBox(height: 15,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                            Text(widget.chocoItem?.name??'',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 25),)
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width*0.90,
+                              child: Text(widget.chocoItem?.name??'',
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 25),
+                              maxLines: 3,
+                              textAlign: TextAlign.center,
+                              ))
                           ],),
                           const SizedBox(height: 12,),
                           Row(

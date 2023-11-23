@@ -1,3 +1,4 @@
+import 'package:choco/models/announ_model.dart';
 import 'package:choco/models/item_model.dart';
 
 class DummyData{
@@ -76,6 +77,13 @@ class DummyData{
     //   price: '10',
     //   nutritionDeclaration: 'Energi Kj: 2082 kJ - Energi: 498 kcal - Fett: 26,5 g - Varav mättat fett: 15,8 g - Kolhydrat: 55,4 g - Varav sockerarter: 50,7 g - Protein: 4,6 g - Salt: 0,08 g'
     //   ),
+  ];
+
+  static List<Announcment> announcments=[
+    // Announcment(id: '1',txt: 'The best types of chocolate'),
+    // Announcment(id: '1',txt: 'Exclusive offers for our customers'),
+    // Announcment(id: '1',txt: 'hi klkhlh hkjh '),
+    // Announcment(id: '1',txt: 'hi klkhlh hkjh '),
   ];
 
  static List<String> branches = ['benha','benha2','benha3'];

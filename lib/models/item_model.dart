@@ -7,13 +7,15 @@ class ItemModel{
   String? branch;
   String? discount;
   String? ingredients;
-  String? images;
+  String? image;
+  String? imagesList;
   String? nutritionDeclaration;
 
   ItemModel({
     this.id,
     this.name,
-    this.images,
+    this.image,
+    this.imagesList,
     this.discription,
     this.category,
     this.branch,
@@ -28,7 +30,8 @@ class ItemModel{
     return <String, dynamic>{
       'id': id,
       'name': name,
-      'images': images,
+      'image': image,
+      'imagesList':imagesList,
       'discription': discription,
       'category':category,
       'branch':branch,
@@ -43,7 +46,8 @@ class ItemModel{
     return ItemModel(
       id: map['id'] ?? '',
       name: map['name'] ??'',
-      images:map['images'] ??'',
+      image:map['image'] ??'',
+      imagesList: map['imagesList']??'',
       discription:map['discription'] ??'',
       category:map['category'] ??'',
       branch:map['branch'] ??'',

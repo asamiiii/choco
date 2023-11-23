@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:choco/core/dummy_data.dart';
+import 'package:choco/models/announ_model.dart';
 import 'package:choco/models/item_model.dart';
+import 'package:choco/screens/home/function.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 // import 'package:path/path.dart' as p;
@@ -20,6 +22,15 @@ class FirebaseHelper {
         );
   }
 
+  static CollectionReference getAnnouncmentCollection() {
+    return FirebaseFirestore.instance
+        .collection('announcment')
+        .withConverter<Announcment>(
+          fromFirestore: (snapshot, _) => Announcment.fromJson(snapshot.data()!),
+          toFirestore: (task, _) => task.toJson(),
+        );
+  }
+
     static Future getItemsFromFirestore() async{
       DummyData.chocoList.clear();
      var querySnapshot =await getInvoiceCollection().get();
@@ -28,6 +39,21 @@ class FirebaseHelper {
       DummyData.chocoList.add(element.data() as ItemModel);
     }
     debugPrint('Firebase :${DummyData.chocoList}');
+    // handleCategoryItemsList(branchName: branch);
+    // handleBranchesItemsList(branchName: branch);
+    // return querySnapshot;
+  }
+
+      static Future getAnnouncmentFromFirestore() async{
+    //   DummyData.chocoList.clear();
+     var querySnapshot =await getAnnouncmentCollection().get();
+    // // Get data from docs and convert map to List
+    for (var element in querySnapshot.docs) {
+      DummyData.announcments.add(element.data() as Announcment);
+    }
+    // debugPrint('Firebase :${DummyData.chocoList}');
+    // handleCategoryItemsList(branchName: branch);
+    // handleBranchesItemsList(branchName: branch);
     // return querySnapshot;
   }
 
