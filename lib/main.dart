@@ -20,7 +20,7 @@ void main() async{
 );
 branchName=await CacheHelper.getStringFromCache(key: 'branch');
 //  SystemChrome.setEnabledSystemUIMode(SystemUiMode., overlays: []);
-// SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge, overlays: []);
+SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   runApp( ChocoApp());
    MultiProvider(
       providers: [
@@ -54,7 +54,7 @@ class _ChocoAppState extends State<ChocoApp> {
     return ChangeNotifierProvider(
       create: (context) => MainProvider(),
       child: MaterialApp(
-        
+        debugShowCheckedModeBanner: false,
         title: '',
         theme: AppTheme.theme,
         home:branchName == null? LoginScreen():Home(branchName: branchName) 

@@ -40,7 +40,7 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
         Navigator.pop(context);
       },child:const Icon(Icons.arrow_back ), ),
       body:  Padding(
-        padding: const EdgeInsets.only(top: 50),
+        padding: const EdgeInsets.only(top: 10),
         child: SingleChildScrollView(
           child: Column(
                     children: [
@@ -71,8 +71,7 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                           // const SizedBox(height: 10,),
                            Text('Ingredients',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 15),),
                           const SizedBox(height: 5,),
-                          LayoutBuilder(
-                            builder: (context, constraints) =>Container(
+                          Container(
                               // height: MediaQuery.of(context).size.height*0.20,
                               width: MediaQuery.of(context).size.width*0.90,
                               decoration: BoxDecoration(
@@ -97,11 +96,11 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                   ),
                 ),
                             ),
-                          ),
+                          
       
                           const SizedBox(height: 20,),
                            Text('Nutrition declaration per 100g',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13)),
-                          //  const SizedBox(height: 5,),
+                           const SizedBox(height: 10,),
                            
                            ListView.builder(
                             // separatorBuilder: (context, index) => const SizedBox(height: 10,),
@@ -109,12 +108,20 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                             physics: const ScrollPhysics(),
                            itemCount: nutritionColumn2.length,
                            itemBuilder: (BuildContext context, int index) {
-                             return Row(
-                               mainAxisAlignment: MainAxisAlignment.spaceAround,
-                               children: [
-                                 Text(nutritionColumn1[index]),
-                                //  const Text('  -------  ',),
-                                 Text(nutritionColumn2[index])],
+                             return Center(
+                               child: Row(
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 children: [
+                                  const Expanded(child: SizedBox()),
+                                   Container(
+                                    color: index.isOdd?golden:null,
+                                    width: MediaQuery.of(context).size.width*0.30,child: Text(nutritionColumn1[index],),),
+                                   const SizedBox(width: 10,),
+                                   SizedBox(width: MediaQuery.of(context).size.width*0.20,child: Text(nutritionColumn2[index]),),
+                                   const Expanded(child: SizedBox()),
+                                   ],
+                                   
+                               ),
                              );
                            },
                              ),

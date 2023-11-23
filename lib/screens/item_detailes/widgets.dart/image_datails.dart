@@ -44,7 +44,7 @@ class _DeatilesImageState extends State<DeatilesImage> {
                                     width: 300,
                                   child: Hero(
                                     // transitionOnUserGestures:true ,
-                                    tag: widget.itemId!,
+                                    tag:  e==widget.imagesList[0]? widget.itemId!:'',
                                     child: ClipOval(
                                       child: CachedNetworkImage(
                                       imageUrl: e ,

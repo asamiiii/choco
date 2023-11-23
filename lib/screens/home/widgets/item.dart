@@ -41,7 +41,7 @@ class Item extends StatelessWidget {
               top: 0,
               left: 14,
               child: Hero(
-                tag:  chocoItem?.id??'',
+                tag:  chocoItem!.id??'',
                 child: ClipOval(
                   child: CachedNetworkImage(
                     imageUrl: chocoItem?.image ?? '',
@@ -88,7 +88,7 @@ class Item extends StatelessWidget {
 
               chocoItem?.discount! != '' ? Positioned(
                 bottom: 20,
-                right: 0,
+                right: 5,
                 child: Container(
                 height: 30,
                 width: 50,
