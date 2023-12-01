@@ -1,24 +1,22 @@
 import 'package:choco/core/theme.dart';
-import 'package:choco/data_source/local.dart';
 import 'package:choco/firebase_options.dart';
 import 'package:choco/providers.dart/provider.dart';
-import 'package:choco/screens/home/home.dart';
-import 'package:choco/screens/login/login_screen.dart';
+import 'package:choco/screens/home/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 // Import the generated file
 // import 'firebase_options.dart';
 
-String? branchName ;
 
 void main() async{
    WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
   options: DefaultFirebaseOptions.currentPlatform,
 );
-branchName=await CacheHelper.getStringFromCache(key: 'branch');
+
 //  SystemChrome.setEnabledSystemUIMode(SystemUiMode., overlays: []);
 SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   runApp( ChocoApp());
@@ -43,7 +41,7 @@ class _ChocoAppState extends State<ChocoApp> {
 
   @override
   void initState() {
-   debugPrint('branc : $branchName');
+  //  debugPrint('branc : $branchName');
    
     super.initState();
   }
@@ -57,7 +55,16 @@ class _ChocoAppState extends State<ChocoApp> {
         debugShowCheckedModeBanner: false,
         title: '',
         theme: AppTheme.theme,
-        home:branchName == null? LoginScreen():Home(branchName: branchName) 
+        builder: (context, child) => ResponsiveBreakpoints.builder(
+        child: child!,
+        breakpoints: [
+          const Breakpoint(start: 0, end: 450, name: MOBILE),
+          const Breakpoint(start: 451, end: 800, name: TABLET),
+          const Breakpoint(start: 801, end: 1920, name: DESKTOP),
+          const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
+        ],
+      ),
+        home:const SplashScreen()
       ),
     );
   }

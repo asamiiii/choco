@@ -3,15 +3,14 @@ import 'package:category_navigator/category_navigator.dart';
 import 'package:choco/core/colors.dart';
 import 'package:choco/core/dummy_data.dart';
 import 'package:choco/core/images_path.dart';
-import 'package:choco/data_source/remote_firebase.dart';
-import 'package:choco/main.dart';
+import 'package:choco/data_source/local.dart';
 import 'package:choco/providers.dart/provider.dart';
-import 'package:choco/screens/home/function.dart';
 import 'package:choco/screens/home/widgets/item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
+// ignore: must_be_immutable
 class Home extends StatefulWidget {
   String? branchName;
   Home({super.key, this.branchName});
@@ -23,21 +22,25 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   void initState() {
+    var provider = context.read<MainProvider>();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      var provider = context.read<MainProvider>();
+      var branch =await CacheHelper.getStringFromCache(key: 'branch');
       await provider.getItems();
       provider.handleCategoryItemsList();
+      debugPrint('branch init : $branch');
       provider.setSelectedCategory(
-          branch: branchName,
+          branch: branch,
           categoryTxt: provider.categoryList?[0]);
       await provider.getAnnouncment();
     });
+    
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    var responcive = ResponsiveBreakpoints.of(context);
     var screenWidth = MediaQuery.of(context).size.width;
     var itemsCount = (screenWidth / 190).floor();
     return RefreshIndicator(
@@ -45,8 +48,9 @@ class _HomeState extends State<Home> {
        var provider = context.read<MainProvider>();
       await provider.getItems();
       provider.handleCategoryItemsList();
+      provider.handleBranchesItemsList();
       provider.setSelectedCategory(
-          branch: branchName,
+          branch: widget.branchName,
           categoryTxt: provider.categoryList?[0]);
       await provider.getAnnouncment();
       },
@@ -61,7 +65,7 @@ class _HomeState extends State<Home> {
               builder: (context, provider, child) => provider.isLoading == false
                   ? Padding(
                           padding:
-                              const EdgeInsets.only(left: 10, right: 10, top: 30),
+                              const EdgeInsets.only(left: 10, right: 10, top: 50),
                           child: Column(
                             children: [
                               Image.asset(
@@ -75,6 +79,9 @@ class _HomeState extends State<Home> {
                               ),
                               
                               CategoryNavigator(
+                                highlightBackgroundColor: golden,
+                                unselectedTextStyle:responcive.isMobile? Theme.of(context).textTheme.bodySmall?.copyWith(color: mainColor):Theme.of(context).textTheme.bodyLarge?.copyWith(color: mainColor,fontSize: 15) ,
+                                highlightTextStyle: responcive.isMobile? Theme.of(context).textTheme.bodySmall?.copyWith(color: mainColor):Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.black,fontSize: 17) ,
                                 labels: provider.categoryList,
                                 defaultActiveItem: 0,
                                 onChange: (index) {
@@ -91,6 +98,7 @@ class _HomeState extends State<Home> {
                                       child: GridView.builder(
                                         shrinkWrap: true,
                                         itemBuilder: (context, index) => Item(
+                                          index: index,
                                             chocoItem: DummyData
                                                 .filteredChocoList[index]),
                                         itemCount:
@@ -123,7 +131,7 @@ class _HomeState extends State<Home> {
                         bottomNavigationBar: Consumer<MainProvider>(
               builder: (context, value, child) => value.isLoading == false
                   ? SizedBox(
-                      height: 50,
+                      height: responcive.isMobile? 50:60,
                       child: CarouselSlider(
                         options: CarouselOptions(
                           scrollDirection: Axis.horizontal,
@@ -136,7 +144,7 @@ class _HomeState extends State<Home> {
                                 children: [
                                   Container(
                                     padding: const EdgeInsets.all(8),
-                                    height: 50,
+                                    height: responcive.isMobile? 50:60,
                                     
                                     width:
                                         MediaQuery.of(context).size.width ,
@@ -145,7 +153,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     child: Text(
                                       e.txt ?? '',
-                                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: mainColor),
+                                      style:responcive.isMobile? Theme.of(context).textTheme.bodySmall?.copyWith(color: mainColor):Theme.of(context).textTheme.bodyLarge?.copyWith(color: mainColor),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),

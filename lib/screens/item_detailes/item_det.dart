@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:choco/core/colors.dart';
 import 'package:choco/models/item_model.dart';
 import 'package:choco/screens/item_detailes/widgets.dart/image_datails.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 // ignore: must_be_immutable
 class ChocoDetailes extends StatefulWidget {
@@ -15,12 +15,13 @@ class ChocoDetailes extends StatefulWidget {
 
 class _ChocoDetailesState extends State<ChocoDetailes> {
   List<String>imagesList=[];
- 
-  @override
-  Widget build(BuildContext context) {
-     var nutritionRow = widget.chocoItem?.nutritionDeclaration?.trim().split('-')??[]; 
-     var nutritionColumn1=[];
+  var nutritionColumn1=[];
      var nutritionColumn2=[];
+
+  @override
+  void initState() {
+    var nutritionRow = widget.chocoItem?.nutritionDeclaration?.trim().split('-')??[]; 
+     
      for (var element in nutritionRow) { 
       List<String>? splitted= element.trim().split(':');
       // if(splitted.length>2){
@@ -34,13 +35,19 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
       widget.chocoItem?.imagesList?.trim().split(',').forEach((element) { 
         imagesList.add(element);
       });
+    super.initState();
+  }
+ 
+  @override
+  Widget build(BuildContext context) {
+     var responcive = ResponsiveBreakpoints.of(context);
     return Scaffold(
       // appBar: AppBar(),
       floatingActionButton: FloatingActionButton(onPressed: (){
         Navigator.pop(context);
       },child:const Icon(Icons.arrow_back ), ),
       body:  Padding(
-        padding: const EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.only(top: 50),
         child: SingleChildScrollView(
           child: Column(
                     children: [
@@ -66,10 +73,10 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                               height: 50,
                               child: Text(
                                 textAlign: TextAlign.center,
-                                widget.chocoItem?.discription??'',style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 15),maxLines: 3,overflow: TextOverflow.ellipsis,))
+                                widget.chocoItem?.discription??'',style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 18),maxLines: 3,overflow: TextOverflow.ellipsis,))
                           ],),
                           // const SizedBox(height: 10,),
-                           Text('Ingredients',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 15),),
+                           Text('Ingredients',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize:responcive.isMobile?  15:20),),
                           const SizedBox(height: 5,),
                           Container(
                               // height: MediaQuery.of(context).size.height*0.20,
@@ -91,7 +98,7 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                     child: Text(
                       widget.chocoItem!.ingredients!,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(),
+                      style: responcive.isMobile? Theme.of(context).textTheme.bodySmall:Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 17),
                     ),
                   ),
                 ),
@@ -99,8 +106,8 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                           
       
                           const SizedBox(height: 20,),
-                           Text('Nutrition declaration per 100g',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 13)),
-                           const SizedBox(height: 10,),
+                           Text('Nutrition declaration per 100g',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize:responcive.isMobile? 13:17)),
+                           const SizedBox(height: 20,),
                            
                            ListView.builder(
                             // separatorBuilder: (context, index) => const SizedBox(height: 10,),
@@ -115,9 +122,9 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                                   const Expanded(child: SizedBox()),
                                    Container(
                                     color: index.isOdd?golden:null,
-                                    width: MediaQuery.of(context).size.width*0.30,child: Text(nutritionColumn1[index],),),
-                                   const SizedBox(width: 10,),
-                                   SizedBox(width: MediaQuery.of(context).size.width*0.20,child: Text(nutritionColumn2[index]),),
+                                    width: MediaQuery.of(context).size.width*0.30,child: Text(nutritionColumn1[index],style:Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: responcive.isMobile?15:18)),),
+                                  const Expanded(child: SizedBox()), 
+                                   SizedBox(width: MediaQuery.of(context).size.width*0.13,child: Text(nutritionColumn2[index],style:Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: responcive.isMobile?15:18)),),
                                    const Expanded(child: SizedBox()),
                                    ],
                                    

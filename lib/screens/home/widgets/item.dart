@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Item extends StatelessWidget {
+  int? index;
   ItemModel? chocoItem;
-  Item({super.key, required this.chocoItem});
+  Item({super.key, required this.chocoItem,this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -56,18 +57,19 @@ class Item extends StatelessWidget {
                 ),
               )),
           Positioned(
-              top: 160,
+              top: 140,
               left: 20,
               // right: 20,
               child: Column(
                 children: [
                   SizedBox(
                     width: 160,
-                    height: 30,
+                    height: 60,
                     child: Text(
                       chocoItem?.name ?? '',
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyLarge,
+                      maxLines: 2,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 15),
                     ),
                   ),
                   const SizedBox(

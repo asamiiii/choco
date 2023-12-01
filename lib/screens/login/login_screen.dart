@@ -1,16 +1,13 @@
 import 'package:choco/core/colors.dart';
-import 'package:choco/core/dummy_data.dart';
 import 'package:choco/core/images_path.dart';
 import 'package:choco/data_source/local.dart';
-import 'package:choco/data_source/remote_firebase.dart';
 import 'package:choco/providers.dart/provider.dart';
-import 'package:choco/screens/home/function.dart';
 import 'package:choco/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
-   LoginScreen({super.key});
+   const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -27,8 +24,9 @@ TextEditingController codeController = TextEditingController();
       // var branchName=await CacheHelper.getStringFromCache(key: 'branch');
       // await FirebaseHelper.getItemsFromFirestore(branch: branchName);
     // handleBranchesItemsList();
+     context.read<MainProvider>().getItems();
     });
-    context.read<MainProvider>().getItems();
+    
     
     super.initState();
   }
@@ -76,11 +74,14 @@ TextEditingController codeController = TextEditingController();
                 
                 
                 if(provider.branches.contains(codeController.text.trim())){
+                   await CacheHelper.addStringToCache(key: 'branch', value:codeController.text.trim());
                   provider.handleCategoryItemsList();
-                  provider.setSelectedCategory(branch:codeController.text.trim(),categoryTxt: provider.categoryList?[0] );
+                  // provider.setSelectedCategory(branch:codeController.text,categoryTxt: provider.categoryList?[0] );
+                  // ignore: use_build_context_synchronously
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  Home(branchName:codeController.text.trim()),));
-                  await CacheHelper.addStringToCache(key: 'branch', value:codeController.text.trim());
-                }else{
+                 
+                }
+                else{
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Center(child: Text("Login failed"))));
                 }

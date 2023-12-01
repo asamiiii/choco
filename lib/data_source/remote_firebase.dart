@@ -1,8 +1,6 @@
-import 'dart:io';
 import 'package:choco/core/dummy_data.dart';
 import 'package:choco/models/announ_model.dart';
 import 'package:choco/models/item_model.dart';
-import 'package:choco/screens/home/function.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 // import 'package:path/path.dart' as p;
@@ -15,7 +13,7 @@ class FirebaseHelper {
 
  static CollectionReference getInvoiceCollection() {
     return FirebaseFirestore.instance
-        .collection('benha')
+        .collection('Items')
         .withConverter<ItemModel>(
           fromFirestore: (snapshot, _) => ItemModel.fromJson(snapshot.data()!),
           toFirestore: (task, _) => task.toJson(),
@@ -24,7 +22,7 @@ class FirebaseHelper {
 
   static CollectionReference getAnnouncmentCollection() {
     return FirebaseFirestore.instance
-        .collection('announcment')
+        .collection('Announcment')
         .withConverter<Announcment>(
           fromFirestore: (snapshot, _) => Announcment.fromJson(snapshot.data()!),
           toFirestore: (task, _) => task.toJson(),
