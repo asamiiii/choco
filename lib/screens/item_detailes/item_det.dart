@@ -70,13 +70,15 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                             children: [
                             SizedBox(
                               width: MediaQuery.of(context).size.width*0.70,
-                              height: 50,
-                              child: Text(
-                                textAlign: TextAlign.center,
-                                widget.chocoItem?.discription??'',style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 18),maxLines: 3,overflow: TextOverflow.ellipsis,))
+                              // height: 50,
+                              child: SingleChildScrollView(
+                                child: Text(
+                                  textAlign: TextAlign.center,
+                                  widget.chocoItem?.discription??'',style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 18),maxLines: 4,overflow: TextOverflow.ellipsis,),
+                              ))
                           ],),
-                          // const SizedBox(height: 10,),
-                           Text('Ingredients',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize:responcive.isMobile?  15:20),),
+                          const SizedBox(height: 10,),
+                           Text('Ingredienser',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize:responcive.isMobile?  15:20),),
                           const SizedBox(height: 5,),
                           Container(
                               // height: MediaQuery.of(context).size.height*0.20,
@@ -106,7 +108,7 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                           
       
                           const SizedBox(height: 20,),
-                           Text('Nutrition declaration per 100g',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize:responcive.isMobile? 13:17)),
+                           Text('Näringdeklaration per 100g',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize:responcive.isMobile? 13:17)),
                            const SizedBox(height: 20,),
                            
                            ListView.builder(
@@ -123,8 +125,10 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                                    Container(
                                     color: index.isOdd?golden:null,
                                     width: MediaQuery.of(context).size.width*0.30,child: Text(nutritionColumn1[index],style:Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: responcive.isMobile?15:18)),),
-                                  const Expanded(child: SizedBox()), 
-                                   SizedBox(width: MediaQuery.of(context).size.width*0.13,child: Text(nutritionColumn2[index],style:Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: responcive.isMobile?15:18)),),
+                                  const SizedBox(width: 10,), 
+                                   Container(
+                                    color: index.isOdd?golden:null,
+                                    width: MediaQuery.of(context).size.width*0.13,child: Text(nutritionColumn2[index],style:Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: responcive.isMobile?15:18)),),
                                    const Expanded(child: SizedBox()),
                                    ],
                                    
