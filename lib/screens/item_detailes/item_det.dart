@@ -21,12 +21,18 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
   @override
   void initState() {
     var nutritionRow = widget.chocoItem?.nutritionDeclaration?.trim().split('-')??[]; 
-     
+     debugPrint('nutritionRow : $nutritionRow');
      for (var element in nutritionRow) { 
       List<String>? splitted= element.trim().split(':');
+      debugPrint('splitted : $splitted');
       // if(splitted.length>2){
-      nutritionColumn1.add(splitted[0].trim());
-      nutritionColumn2.add(splitted[1].trim());
+        if(splitted.isNotEmpty){
+             nutritionColumn1.add(splitted[0].trim());
+        }
+      
+      if(splitted.length>=2){
+        nutritionColumn2.add(splitted[1].trim());
+      }
      }
       // nutritionRow = widget.chocoItem?.nutritionDeclaration?.split(':'); 
      debugPrint('nutritionColumn1 : $nutritionColumn1');
@@ -98,7 +104,7 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                   padding: const EdgeInsets.all(9),
                   child: SingleChildScrollView(
                     child: Text(
-                      widget.chocoItem!.ingredients!,
+                      widget.chocoItem!.ingredients??'',
                       textAlign: TextAlign.center,
                       style: responcive.isMobile? Theme.of(context).textTheme.bodySmall:Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 17),
                     ),
@@ -108,10 +114,10 @@ class _ChocoDetailesState extends State<ChocoDetailes> {
                           
       
                           const SizedBox(height: 20,),
-                           Text('Näringdeklaration per 100g',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize:responcive.isMobile? 13:17)),
+                          nutritionColumn2.isEmpty || nutritionColumn1.isEmpty ?const SizedBox(): Text('Näringdeklaration per 100g',style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize:responcive.isMobile? 13:17)),
                            const SizedBox(height: 20,),
                            
-                           ListView.builder(
+                          nutritionColumn2.isEmpty || nutritionColumn1.isEmpty ? const SizedBox() : ListView.builder(
                             // separatorBuilder: (context, index) => const SizedBox(height: 10,),
                             shrinkWrap: true,
                             physics: const ScrollPhysics(),
